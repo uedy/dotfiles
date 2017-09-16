@@ -1,60 +1,143 @@
-" 文字コードをUFT-8に設定
-set fenc=utf-8
-" バックアップファイルを作らない
- set nobackup
-" スワップファイルを作らない
- set noswapfile
- " 編集中のファイルが変更されたら自動で読み直す
- set autoread
- " バッファが編集中でもその他のファイルを開けるように
- set hidden
- " 入力中のコマンドをステータスに表示する
- set showcmd
+" Initialization {{{
+" My autocmd group
+augroup myautocmd
+  autocmd!
+augroup END
+" condition variables
+let g:is_windows = has('win32') || has('win64')
+let g:is_unix = has('unix')
+let g:is_gui = has('gui_running')
+let g:is_terminal = !g:is_gui
+let g:is_unicode = (&termencoding ==# 'utf-8' || &encoding == 'utf-8') && !(exists('g:discard_unicode') && g:discard_unicode != 0)
+
+if has('vim_starting')
+	set nocompatible
+	set runtimepath+=~/.vim/bundle/neobundundle.vim
+endif
+
+" must be set with multibyte strings
+scriptencoding utf-8
+" }}}
+
+" Vim options {{{
+" ### Indent ### {{{
+" 新しい行のインデントを現在行と同じにする
+set autoindent
+
+" 高度なインデント
+set smartindent
+
+" タブが対応する空白の数
+set tabstop=2
+
+" インデントでずれる幅
+set shiftwidth=2
+
+" タブキーでカーソルが動く幅
+set softtabstop=2
+
+" タブの代わりに空白を挿入
+set expandtab
+
+" 空白文字をいいかんじで挿入する
+set smarttab
+
+" 折り返しの際にインデントを考慮
+if exists('+breakindent')
+  set breakindent
+endif
+" }}}
 
 
- " 見た目系
- " 行番号を表示
- set number
- " 現在の行を強調表示
- set cursorline
- " 行末の1文字先までカーソルを移動できるように
- set virtualedit=onemore
- " インデントはスマートインデント
- set smartindent
- " ビープ音を可視化
- set visualbell
- " 括弧入力時の対応する括弧を表示
- set showmatch
- " ステータスラインを常に表示
- set laststatus=2
- " コマンドラインの補完
- set wildmode=list:longest
- " 折り返し時に表示行単位での移動できるようにする
- nnoremap j gj
- nnoremap k gk
+" ### Folding ### {{{
+" 折りたたみを示す列を表示
+set foldcolumn=1
 
+" 最初に折りたたみをなるべく開く
+set foldlevel=99
 
- " Tab系
- " 不可視文字を可視化(タブが「▸-」と表示される)
- set list listchars=tab:\▸\-
- " Tab文字を半角スペースにする
- set expandtab
- " 行頭以外のTab文字の表示幅（スペースいくつ分）
- set tabstop=2
- " 行頭でのTab文字の表示幅
- set shiftwidth=2
+" デフォルトの折りたたみ方法
+set foldmethod=marker
 
+" 折りたたまれたテキストの表示方法
+set foldtext=MyFoldText()
+" }}}
 
- " 検索系
- " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
- set ignorecase
- " 検索文字列に大文字が含まれている場合は区別して検索する
- set smartcase
- " 検索文字列入力時に順次対象文字列にヒットさせる
- set incsearch
- " 検索時に最後まで行ったら最初に戻る
-set wrapscan
- " 検索語をハイライト表示
+" ### Search ### {{{
+" ハイライトで検索
 set hlsearch
- " ESC連打でハイライト解除
- nmap <Esc><Esc> :nohlsearch<CR><Esc>
+nohlsearch
+
+" 大文字小文字を無視
+set ignorecase
+
+" インクリメンタル検索
+set incsearch
+
+" 大文字が入力されたら大文字小文字を区別する
+set smartcase
+" }}}
+
+" ### Buffer ### {{{
+" 外部でファイルが変更されたら自動で読みなおす
+set autoread
+
+" 隠れ状態にしない
+set nohidden
+
+" 漢には不要
+set noswapfile
+
+" on だと guard が複数回実行されてしまう問題がある
+set nowritebackup
+
+" 既存のファイルを開くときはとりあえず utf-8
+set fileencodings=utf-8,cp932
+
+" Vim を終了しても undo の記録を残す
+set undofile undodir=~/.vimundo
+" }}}
+
+" ### View ### {{{
+" 色数
+set t_Co=256
+
+" コマンドラインの行数
+set cmdheight=3
+
+" 現在行の色を変える
+set cursorline
+let g:cursorline_flg = 1 " cursorline はウィンドウローカルなのでグローバルなフラグを用意しておく
+let g:cursorcolumn_flg = 0
+
+" ステータス行を常に表示
+set laststatus=2
+
+" 不可視文字を可視化
+set list
+set listchars=tab:>\ "
+
+" 行番号を表示 (相対)
+set number relativenumber
+
+" 最低でも上下に表示する行数
+set scrolloff=5
+
+" 入力したコマンドを画面下に表示
+set showcmd
+
+" 自動折り返ししない
+set textwidth=0
+
+" タブページのラベルを常に表示
+set showtabline=2
+
+" 長い行を @ にさせない
+set display=lastline
+
+" 埋める文字
+set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:-,diff:-
+
+" vim の継続行(\)のインデント量を 0 にする
+let g:vim_indent_cont = 0
+

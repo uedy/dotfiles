@@ -1,0 +1,26 @@
+snippet     suite
+abbr        themis suite
+options     head
+	let ${1:s:suite} = themis#suite('${2}')${0}
+
+snippet     assert
+abbr        themis assert
+options     head
+	let s:assert = themis#helper('${1:assert}')${0}
+
+snippet     fun_themis
+abbr        themis test function
+options     head
+	function! s:suite.${1:#:test_case}()
+		${0}
+	endfunction
+
+snippet     reltime
+abbr        reltimestr(reltime())
+options     head
+	let s0 = reltime()
+	${0:TARGET}
+	let s1 = reltime()
+	echomsg 'time: ' . reltimestr(reltime(s0, s1))
+
+# vim: set sw=4 ts=4 sts=4 noexpandtab:
