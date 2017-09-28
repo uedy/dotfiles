@@ -587,3 +587,4 @@ NeoBundle 'LeafCage/vimhelpgenerator', {
 " }}}
 NeoBundle 'fatih/vim-go'
 
+NeoBundle 'majutsushi/tagbar.git'

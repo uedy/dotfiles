@@ -113,7 +113,7 @@ set list
 set listchars=tab:>\ "
 
 " 行番号を表示 (相対)
-set number relativenumber
+set number
 
 " 最低でも上下に表示する行数
 set scrolloff=5
@@ -1764,7 +1764,8 @@ endif
 command! Lighten let g:my_background = 'light' | colorscheme cohama_light
 command! Darken  let g:my_background = 'dark' | colorscheme cohama
 " }}}
-
+let g:go_bin_path = expand("~/dev/bin")
+au BufWritePost *.go !gofmt -w %
 autocmd FileType go nmap <Space>gr <Plug>(go-run)
 autocmd FileType go nmap <Space>gb <Plug>(go-build)
 autocmd FileType go nmap <Space>gt <Plug>(go-test)
