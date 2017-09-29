@@ -1,3 +1,5 @@
 export GOPATH=$HOME/dev
 export PATH=/path/to/go_appengine:$PATH
 if [ -f '/usr/local/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/google-cloud-sdk/path.zsh.inc'; fi
+
+
