@@ -1,0 +1,25 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+[[plugins]] # カラースキーマ
+repo = 'Haron-Prime/Antares'
+hook_add = '''
+  set background=dark
+  " colorscheme 設定は source 後に行う必要があるので VimEnter で行う。
+  " 但し Colorscheme イベントの発生が抑制されないよう nented を付ける。
+  au MyAutoCmd VimEnter * nested colorscheme Antares
+'''
+[[plugins]] # Unite.vimが依存
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]] # vimfilerが依存
+repo   = 'Shougo/unite.vim'
+
+[[plugins]] # VSCodeっぽいファイラ
+repo = 'Shougo/vimfiler'
+
+[[plugins]]
+repo = 'freeo/vim-kalisi'
+

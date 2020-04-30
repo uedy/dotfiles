@@ -1,0 +1,128 @@
+# dein.vim command
+[[plugins]]
+repo = 'haya14busa/dein-command.vim'
+on_cmd = 'Dein'
+[[plugins]] # ステータス行を見やすく
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] # コード補完
+repo = 'shougo/deoplete.nvim'
+# プラグインが dein.vim によって追加されたとき実行
+hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+#---------------
+# javascript
+#---------------
+
+[[plugins]] # JSX, Flow, Typescript
+repo = 'billyvg/tigris.nvim'
+on_ft = ['javascript', 'javascript.jsx']
+hook_post_update = '''
+  let g:dein#plugin.build = './install.sh'
+'''
+hook_add = '''
+  let g:tigris#enabled = 1
+  let g:tigris#on_the_fly_enabled = 1
+  let g:tigris#delay = 300
+'''
+
+[[plugins]] # React Jsx
+repo = 'MaxMEllon/vim-jsx-pretty'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]] # javascript prettier
+repo = 'prettier/vim-prettier'
+
+[[plugins]] # gfでrequire()
+repo = 'moll/vim-node'
+on_ft = ['javascript']
+
+[[plugins]] # nodejs補完
+repo = 'myhere/vim-nodejs-complete'
+on_ft = ['javascript']
+hook_add = '''
+  setl omnifunc=jscomplete#CompleteJS
+  if !exists('g:neocomplcache_omni_functions')
+    let g:neocomplcache_omni_functions = {}
+  endif
+  let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
+  let g:node_usejscomplete = 1
+'''
+
+[[plugins]] # lint系
+repo = 'w0rp/ale.git'
+on_source = ['lightline.vim']
+hook_add = '''
+  let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
+'''
+#---------------
+# Vue.js
+#---------------
+[[plugins]] # vim-vue
+repo = 'posva/vim-vue'
+on_ft = ['vue']
+
+[[plugins]]
+repo = 'sheerun/vim-polyglot'
+
+[[plugins]] # サイズ変更 ctrl + E
+repo = 'simeji/winresizer'
+
+#---------------
+# Toml
+#---------------
+[[plugins]] # tomlのスタイル
+repo  = 'cespare/vim-toml'
+on_ft = ['toml']
+
+#---------------
+# Golang
+#---------------
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = ['go']
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+on_ft = 'go'
+
+#---------------
+# HTML
+#---------------
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html','jsx']
+
+#---------------
+# Python
+#---------------
+[[plugins]] # python補完
+repo = 'davidhalter/jedi-vim'
+on_ft = ['python']
+
+[[plugins]] # syntax系
+repo = 'andviro/flake8-vim'
+on_ft = ['python']
+
+[[plugins]] # インデントをPEP8に準拠
+repo = 'Vimjas/vim-python-pep8-indent'
+on_ft = ['python']
+
+[[plugins]] # Python環境とvirtualenvを連動
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = ['python']
+
+
+[[plugins]] # ローカル変数をハイライト
+repo = 'hachibeeDI/python_hl_lvar.vim'
+on_ft = ['python']
+
+
+[[plugins]] # 関数やクラスをテキストオブジェクトにする
+repo = 'bps/vim-textobj-python'
+on_ft = ['python']
+
+[[plugins]] # Python環境とvirtualenvを連動
+repo = 'kana/vim-textobj-indent'
+on_ft = ['python']
+
